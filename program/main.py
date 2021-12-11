@@ -122,7 +122,7 @@ def show_video_on_console(video_path):
         f = open(text_path, mode='r')
         s = f.read()
         print(s + cursor_move_up + cursor_move_left)
-        time.sleep(0.03)
+        time.sleep(1.0/60.0)
 
 def main():
     """
