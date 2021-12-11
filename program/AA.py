@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
+
 def make_map(str_list):
     l=[]
     font = ImageFont.truetype('../fonts/msgothic.ttc', 20)
@@ -15,6 +16,7 @@ def make_map(str_list):
     chr_map = np.array(str_list)[l2256]
     return chr_map
 
+
 def output(chr_map, imarray, isOutText, out_path):
     aa = chr_map[imarray].tolist()
     if isOutText:
@@ -24,6 +26,7 @@ def output(chr_map, imarray, isOutText, out_path):
     else:
         for i in range(len(imarray)):
             print(''.join(aa[i]))
+
 
 def make_AA(file_path, 
             str_list="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz +-*/%'"+'"!?#&()~^|@;:.,[]{}<>_0123456789',
@@ -36,8 +39,10 @@ def make_AA(file_path,
     imarray = np.asarray(imag.resize((width, width*imag.height//imag.width//(2-int(isFW)))))
     output(make_map(str_list), imarray, isOutText, out_path)
 
+
 def main():
     make_AA(file_path = '../data/image/Shortcake_SONG_shorts_1080pFHR/img_0500.png')
+
 
 if __name__ == '__main__':
     main()

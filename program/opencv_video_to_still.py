@@ -41,10 +41,12 @@ def save_all_frames(video_path, dir_path, basename, ext='png', alpha=1.0, beta=0
             print('')
             return
 
+
 def main():
     save_all_frames('../data/video/Shortcake_SONG_shorts_1080pFHR.mp4', \
                     '../data/image/Shortcake_SONG_shorts_1080pFHR', \
                     'img', 'png')
+
 
 if __name__ == '__main__':
     main()
