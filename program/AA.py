@@ -3,7 +3,7 @@ import numpy as np
 
 def make_map(str_list):
     l=[]
-    font = ImageFont.truetype('/home/isara/.local/share/fonts/msgothic.ttc', 20)
+    font = ImageFont.truetype('../fonts/msgothic.ttc', 20)
     for i in str_list:
         im = Image.new("L",(20,20),"white")
         draw = ImageDraw.Draw(im)
