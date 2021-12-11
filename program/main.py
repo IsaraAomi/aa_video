@@ -1,6 +1,7 @@
 import os, glob, re
 import time
 from tqdm import tqdm
+from multiprocessing import Pool
 
 from opencv_video_to_still import *
 from AA import *
@@ -49,7 +50,6 @@ def get_text_size(text_path):
         height = len(text_list)
     return width, height
 
-
 def convert_MP4_to_PNG(video_path, start_over):
     """
     - Args:
@@ -72,7 +72,7 @@ def convert_MP4_to_PNG(video_path, start_over):
     else:
         print("[INFO] Skip convert: mp4->png")
 
-def convert_MP4_to_PNG_to_TXT(video_path, start_over):
+def convert_MP4_to_PNG_to_TXT_single(video_path, start_over):
     """
     - Args:
         - video_path (str)
@@ -101,6 +101,55 @@ def convert_MP4_to_PNG_to_TXT(video_path, start_over):
     else:
         print("[INFO] Skip convert: png->txt")
 
+def task_PNG_to_TXT(image_path, text_path):
+    """
+    - Args:
+        - image_path (str)
+        - text_path (str)
+    - Returns:
+    """
+    make_AA(file_path=image_path, isOutText=True, out_path=text_path)
+
+def tast_PNG_to_TXT_wrapper(args):
+    return task_PNG_to_TXT(*args)
+
+def convert_MP4_to_PNG_to_TXT_multi(video_path, start_over):
+    """
+    - Args:
+        - video_path (str)
+        - start_over (bool)
+    - Returns:
+    """
+    convert_MP4_to_PNG(video_path, start_over)
+
+    video_file_name = os.path.basename(video_path)
+    video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
+    image_dir = os.path.join("../data/image", video_file_name_wo_ext)
+    image_flist = get_image_flist(image_dir)
+    text_dir = os.path.join("../data/text", video_file_name_wo_ext)
+
+    if ((not os.path.exists(text_dir)) or start_over==True):
+        print("[INFO] Start convert: png->txt")
+        print("[INFO] Wait a moment")
+        os.makedirs(text_dir, exist_ok=True)
+        num_image_file = len(os.listdir(image_dir))
+        image_text_flist = []
+        for image_path in image_flist:
+            image_file_name = os.path.basename(image_path)
+            image_file_name_wo_ext =  os.path.splitext(image_file_name)[0]
+            text_file_name = image_file_name_wo_ext + ".txt"
+            text_path = os.path.join(text_dir, text_file_name)
+            image_text_flist.append((image_path, text_path))
+        # multiprocessing by Pool
+        # used (Number of Logical CPUs - 1)
+        pool = Pool(os.cpu_count()-1)
+        with tqdm(total=len(image_text_flist), bar_format=short_progress_bar) as t:
+            for _ in pool.imap_unordered(tast_PNG_to_TXT_wrapper, image_text_flist):
+                t.update(1)
+        print("[INFO] Finish convert: png->txt")
+    else:
+        print("[INFO] Skip convert: png->txt")
+
 def show_video_on_console(video_path, start_over):
     """
     - Args:
@@ -108,7 +157,8 @@ def show_video_on_console(video_path, start_over):
         - start_over (bool)
     - Returns:
     """
-    convert_MP4_to_PNG_to_TXT(video_path, start_over)
+    # convert_MP4_to_PNG_to_TXT_single(video_path, start_over)
+    convert_MP4_to_PNG_to_TXT_multi(video_path, start_over)
 
     video_file_name = os.path.basename(video_path)
     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
