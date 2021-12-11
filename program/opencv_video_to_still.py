@@ -1,10 +1,17 @@
 import cv2
 import os
 
-def save_all_frames(video_path, dir_path, basename, ext='jpg'):
-    cap = cv2.VideoCapture(video_path)
 
-    print(video_path)
+def save_all_frames(video_path, dir_path, basename, ext='jpg'):
+    """
+    - Args:
+        - video_path (str)
+        - dir_path (str)
+        - basename (str)
+        - ext (str)
+    - Returns:
+    """
+    cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
         return
@@ -24,4 +31,10 @@ def save_all_frames(video_path, dir_path, basename, ext='jpg'):
         else:
             return
 
-save_all_frames('../data/movie/Shortcake_SONG_shorts_1080pFHR.mp4', '../data/image/Shortcake_SONG_shorts_1080pFHR', 'img', 'png')
+def main():
+    save_all_frames('../data/video/Shortcake_SONG_shorts_1080pFHR.mp4', \
+                    '../data/image/Shortcake_SONG_shorts_1080pFHR', \
+                    'img', 'png')
+
+if __name__ == '__main__':
+    main()
