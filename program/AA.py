@@ -4,7 +4,6 @@ import numpy as np
 def make_map(str_list):
     l=[]
     font = ImageFont.truetype('/home/isara/.local/share/fonts/msgothic.ttc', 20)
-    # exit()
     for i in str_list:
         im = Image.new("L",(20,20),"white")
         draw = ImageDraw.Draw(im)
@@ -35,12 +34,10 @@ def make_AA(file_path,
     else:
         str_list=list(str_list)
     imarray = np.asarray(imag.resize((width, width*imag.height//imag.width//(2-int(isFW)))))
-    
-    # exit()
     output(make_map(str_list), imarray, isOutText, out_path)
 
 def main():
-    make_AA(file_path = '../data/image/Shortcake_SONG_shorts_1080pFHR/img_0100.png')
+    make_AA(file_path = '../data/image/Shortcake_SONG_shorts_1080pFHR/img_0500.png')
 
 if __name__ == '__main__':
     main()
