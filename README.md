@@ -1,11 +1,36 @@
-# VSCode Video
-- This is the project to convert video to text video. 
+# AA Video
+- This is the project to convert video to text video on console. 
 
 ## Usage
-- Run
-  ```sh
-  $ python main.py --video-path [VIDEO_PATH]
+- Help
+  ```txt
+  $ python main.py -h
+  usage: main.py [-h] [--video-path VIDEO_PATH] [--start-over] [--alpha ALPHA] [--beta BETA]
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    --video-path VIDEO_PATH, -m VIDEO_PATH
+    --start-over, -s
+    --alpha ALPHA, -a ALPHA
+    --beta BETA, -b BETA
   ```
+- Run
+  - `VIDEO_PATH` is the path to the video which you want to convert.
+    ```sh
+    $ python main.py --video-path [VIDEO_PATH]
+    ```
+  - If you execute `main.py`, `image` and `text` directories are created in `data` directory.
+  - Then, if there `image` and `text` directories, this program skips convert process.
+  - So, if you want to convert again, you need to run as the following:
+    ```sh
+    $ python main.py --video-path [VIDEO_PATH] --start-over
+    ```
+  - In additon, if you want to change contrast and brightness of images, you can change as the following:
+    ```sh
+    $ python main.py --video-path [VIDEO_PATH] --start-over --alpha 1.0 --beta 0.0
+    ```
+    - The images drawn on the console are better suited to high contrast, so `alpha=1.2, beta=0.0` are set as default.
+
 ## References
 - [Shortcake SONG #shorts](https://www.youtube.com/watch?v=pbZYQDRMs6g)
 - [【Python】自動でAA（アスキーアート）を生成してくれる単純なコードを書いた](https://qiita.com/Cartelet/items/542fe3f966b8fa98437a)
