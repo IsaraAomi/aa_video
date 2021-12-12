@@ -1,4 +1,4 @@
-# AA Video
+# AA Video on Console
 - This is the project to convert video to text video on console. 
 - Screen shot:
   - ![](./data/sample/img_0500_txt.png)
