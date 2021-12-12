@@ -6,6 +6,10 @@
   - [[ASCII Art] Shortcake SONG | ラプラス・ダークネス（La+ Darkness）](https://www.youtube.com/watch?v=3t8u8A6oqq8)
 
 ## Usage
+- First
+  ```
+  $ cd program
+  ```
 - Help
   ```txt
   $ python main.py -h
