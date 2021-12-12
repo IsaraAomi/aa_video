@@ -19,8 +19,8 @@
     ```sh
     $ python main.py --video-path [VIDEO_PATH]
     ```
-  - If you execute `main.py`, `image` and `text` directories are created in `data` directory.
-  - Then, if there `image` and `text` directories, this program skips convert process.
+  - If you execute `main.py`, `image/[VIDEO_FILE_NAME]` and `text/[VIDEO_FILE_NAME]` directories are created in `data` directory.
+  - Then, if`image/[VIDEO_FILE_NAME]` and `text/[VIDEO_FILE_NAME]` directories exist, this program skips convert process.
   - So, if you want to convert again, you need to run as the following:
     ```sh
     $ python main.py --video-path [VIDEO_PATH] --start-over
