@@ -1,6 +1,5 @@
 import cv2
 import os
-import sys
 
 
 def save_all_frames(video_path, dir_path, basename, ext='png', alpha=1.0, beta=0.0):
@@ -17,6 +16,8 @@ def save_all_frames(video_path, dir_path, basename, ext='png', alpha=1.0, beta=0
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
+        print("[ERROR] Cannot open video file.")
+        exit()
         return
 
     os.makedirs(dir_path, exist_ok=True)
