@@ -66,6 +66,8 @@ def convert_MP4_to_PNG(video_path):
     video_file_name = os.path.basename(video_path)
     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
     image_dir = os.path.join("../data/image", video_file_name_wo_ext)
+    print("[INFO] Video Path      : {0}".format(video_path))
+    print("[INFO] Image Directory : {0}".format(image_dir))
 
     if ((not os.path.exists(image_dir)) or get_args().start_over==True):
         print("[INFO] Start convert: mp4->png")
@@ -84,16 +86,14 @@ def convert_MP4_to_PNG(video_path):
 #         - video_path (str)
 #     - Returns:
 #     """
+#     convert_MP4_to_PNG(video_path)
+
 #     video_file_name = os.path.basename(video_path)
 #     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
 #     image_dir = os.path.join("../data/image", video_file_name_wo_ext)
 #     image_flist = get_image_flist(image_dir)
 #     text_dir = os.path.join("../data/text", video_file_name_wo_ext)
-#     print("[INFO] Video Path      : {0}".format(video_path))
-#     print("[INFO] Image Directory : {0}".format(image_dir))
 #     print("[INFO] Text Directory  : {0}".format(text_dir))
-
-#     convert_MP4_to_PNG(video_path)
 
 #     if ((not os.path.exists(text_dir)) or get_args().start_over==True):
 #         print("[INFO] Start convert: png->txt")
@@ -130,26 +130,23 @@ def convert_MP4_to_PNG_to_TXT_multi(video_path):
         - video_path (str)
     - Returns:
     """
+    convert_MP4_to_PNG(video_path)
+
     video_file_name = os.path.basename(video_path)
     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
     image_dir = os.path.join("../data/image", video_file_name_wo_ext)
     image_flist = get_image_flist(image_dir)
     text_dir = os.path.join("../data/text", video_file_name_wo_ext)
-    print("[INFO] Video Path      : {0}".format(video_path))
-    print("[INFO] Image Directory : {0}".format(image_dir))
     print("[INFO] Text Directory  : {0}".format(text_dir))
-
-    convert_MP4_to_PNG(video_path)
 
     if ((not os.path.exists(text_dir)) or get_args().start_over==True):
         print("[INFO] Start convert: png->txt")
         print("[INFO] Wait a moment")
         os.makedirs(text_dir, exist_ok=True)
-        num_image_file = len(os.listdir(image_dir))
         image_text_flist = []
         for image_path in image_flist:
             image_file_name = os.path.basename(image_path)
-            image_file_name_wo_ext =  os.path.splitext(image_file_name)[0]
+            image_file_name_wo_ext = os.path.splitext(image_file_name)[0]
             text_file_name = image_file_name_wo_ext + ".txt"
             text_path = os.path.join(text_dir, text_file_name)
             image_text_flist.append((image_path, text_path))
