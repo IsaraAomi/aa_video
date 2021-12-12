@@ -1,5 +1,9 @@
 # AA Video
 - This is the project to convert video to text video on console. 
+- Screen shot:
+  - ![](./data/sample/img_0500_txt.png)
+- Video:
+  - [[ASCII Art] Shortcake SONG | ラプラス・ダークネス（La+ Darkness）](https://www.youtube.com/watch?v=3t8u8A6oqq8)
 
 ## Usage
 - Help
