@@ -190,10 +190,10 @@ def show_video_on_console(video_path):
 
     # show
     for i, text_path in enumerate(text_flist):
-        f = open(text_path, mode='r')
-        s = f.read()
-        print("[INFO] Image: {0}/{1}".format(i, num_images))
-        print(s + cursor_move_up + cursor_move_left)
+        with open (text_path, mode='r') as f:
+            s = f.read()
+            print("[INFO] Image: {0}/{1}".format(i, num_images))
+            print(s + cursor_move_up + cursor_move_left)
         time.sleep(1.0/60.0)
 
 
@@ -205,7 +205,6 @@ def main():
     args = get_args()
     video_path = args.video_path
     show_video_on_console(video_path)
-
    
 if __name__ == '__main__':
     main()
