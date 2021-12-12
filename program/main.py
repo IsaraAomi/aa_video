@@ -20,25 +20,15 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 
-def get_image_flist(dir):
+def get_flist(dir, ext):
     """
     - Args:
         - dir (str)
+        - ext (str)
     - Returns:
         - flist (list)
     """
-    flist = sorted(glob.glob(os.path.join(dir, '*.png')), key=natural_keys)
-    return flist
-
-
-def get_text_flist(dir):
-    """
-    - Args:
-        - dir (str)
-    - Returns:
-        - flist (list)
-    """
-    flist = sorted(glob.glob(os.path.join(dir, '*.txt')), key=natural_keys)
+    flist = sorted(glob.glob(os.path.join(dir, '*.'+ext)), key=natural_keys)
     return flist
 
 
@@ -91,7 +81,7 @@ def convert_MP4_to_PNG(video_path):
 #     video_file_name = os.path.basename(video_path)
 #     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
 #     image_dir = os.path.join("../data/image", video_file_name_wo_ext)
-#     image_flist = get_image_flist(image_dir)
+#     image_flist = get_flist(image_dir, 'png')
 #     text_dir = os.path.join("../data/text", video_file_name_wo_ext)
 #     print("[INFO] Text Directory  : {0}".format(text_dir))
 
@@ -135,9 +125,12 @@ def convert_MP4_to_PNG_to_TXT_multi(video_path):
     video_file_name = os.path.basename(video_path)
     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
     image_dir = os.path.join("../data/image", video_file_name_wo_ext)
-    image_flist = get_image_flist(image_dir)
+    image_flist = get_flist(image_dir, 'png')
     text_dir = os.path.join("../data/text", video_file_name_wo_ext)
     print("[INFO] Text Directory  : {0}".format(text_dir))
+    if (not image_flist):
+        print("[ERROR] Cannot find image files.")
+        exit()
 
     if ((not os.path.exists(text_dir)) or get_args().start_over==True):
         print("[INFO] Start convert: png->txt")
@@ -173,26 +166,27 @@ def show_video_on_console(video_path):
     video_file_name = os.path.basename(video_path)
     video_file_name_wo_ext = os.path.splitext(video_file_name)[0]
     text_dir = os.path.join("../data/text", video_file_name_wo_ext)
-    text_flist = get_text_flist(text_dir)
+    text_flist = get_flist(text_dir, 'txt')
     num_images = len(text_flist)
 
     # get text size
     text_path_0 = text_flist[0]
     width, height = get_text_size(text_path_0)
     print("[INFO] Image Size: (W, H)=({0}, {1})".format(width, height))
-    cursor_move_up = ("\033[" + str(height+2) + "A")
+    cursor_move_up = ("\033[" + str(height+3) + "A")
     cursor_move_left = ("\033[" + str(width) + "D")
 
     # count down to start
     for i in range(3):
         print("\r[INFO] Start soon...: {0}".format(3-i), end="")
         time.sleep(1)
+    print('\r', end="")
 
     # show
     for i, text_path in enumerate(text_flist):
         with open (text_path, mode='r') as f:
             s = f.read()
-            print("[INFO] Image: {0}/{1}".format(i, num_images))
+            print("[INFO] Image: {0}/{1}".format(i+1, num_images))
             print(s + cursor_move_up + cursor_move_left)
         time.sleep(1.0/60.0)
 
