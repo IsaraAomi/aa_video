@@ -13,12 +13,13 @@
 - Help
   ```txt
   $ python main.py -h
-  usage: main.py [-h] [--video-path VIDEO_PATH] [--start-over] [--alpha ALPHA] [--beta BETA]
+  usage: main.py [-h] [--video-path VIDEO_PATH] [--start-over] [--audio-off] [--alpha ALPHA] [--beta BETA]
 
   optional arguments:
     -h, --help            show this help message and exit
     --video-path VIDEO_PATH, -v VIDEO_PATH
     --start-over, -s
+    --audio-off
     --alpha ALPHA
     --beta BETA
   ```
@@ -27,7 +28,12 @@
     ```sh
     $ python main.py --video-path [VIDEO_PATH]
     ```
-  - If you execute `main.py`, `image/[VIDEO_FILE_NAME]` and `text/[VIDEO_FILE_NAME]` directories are created in `data` directory.
+  - This program plays audio of video by default.
+  - If you want to turn off audio, you can run as the following:
+    ```sh
+    $ python main.py --video-path [VIDEO_PATH] --audio-off
+    ```
+  - After you execute `main.py`, `image/[VIDEO_FILE_NAME]` and `text/[VIDEO_FILE_NAME]` directories are created in `data` directory.
   - Then, if`image/[VIDEO_FILE_NAME]` and `text/[VIDEO_FILE_NAME]` directories exist, this program skips convert process.
   - So, if you want to convert again, you need to run as the following:
     ```sh

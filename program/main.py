@@ -15,12 +15,12 @@ def play_audio(audio_path):
     pygame.mixer.music.play(1)
 
 
-def show_video_on_console(video_path, audio_path, with_audio=True):
+def show_video_on_console(video_path, audio_path, audio_off=False):
     """
     - Args:
         - video_path (str)
         - audio_path (str)
-        - with_audio (bool)
+        - audio_off (bool)
     - Returns:
     """
     text_dir = convert_MP4_to_PNG_to_TXT(video_path)
@@ -44,7 +44,7 @@ def show_video_on_console(video_path, audio_path, with_audio=True):
     print('\r', end="")
 
     # play audio
-    if with_audio:
+    if not audio_off:
         play_audio(audio_path)
 
     # show
@@ -62,8 +62,9 @@ def main():
     """
     args = get_args()
     video_path = args.video_path
+    audio_off = args.audio_off
     audio_path = convert_MP4_to_MP3(video_path)
-    show_video_on_console(video_path, audio_path, with_audio=True)
+    show_video_on_console(video_path, audio_path, audio_off)
 
 
 if __name__ == '__main__':
