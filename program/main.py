@@ -62,9 +62,8 @@ def main():
     """
     args = get_args()
     video_path = args.video_path
-    with_audio = args.with_audio
     audio_path = convert_MP4_to_MP3(video_path)
-    show_video_on_console(video_path, audio_path, with_audio)
+    show_video_on_console(video_path, audio_path, with_audio=True)
 
 
 if __name__ == '__main__':
