@@ -13,14 +13,15 @@
 - Help
   ```txt
   $ python main.py -h
-  usage: main.py [-h] [--video-path VIDEO_PATH] [--start-over] [--alpha ALPHA] [--beta BETA]
+  usage: main.py [-h] [--video-path VIDEO_PATH] [--start-over] [--with_audio] [--alpha ALPHA] [--beta BETA]
 
   optional arguments:
     -h, --help            show this help message and exit
-    --video-path VIDEO_PATH, -m VIDEO_PATH
+    --video-path VIDEO_PATH, -v VIDEO_PATH
     --start-over, -s
-    --alpha ALPHA, -a ALPHA
-    --beta BETA, -b BETA
+    --with_audio, -a
+    --alpha ALPHA
+    --beta BETA
   ```
 - Run
   - `VIDEO_PATH` is the path to the video which you want to convert.
