@@ -47,7 +47,7 @@ def get_text_size(text_path):
     return width, height
 
 
-def convert_MP4_to_PNG(video_path):
+def convert_mp4_to_png(video_path):
     """
     - Args:
         - video_path (str)
@@ -72,7 +72,7 @@ def convert_MP4_to_PNG(video_path):
     return image_dir
 
 
-def task_PNG_to_TXT(image_path, text_path):
+def task_png_to_txt(image_path, text_path):
     """
     - Args:
         - image_path (str)
@@ -82,18 +82,18 @@ def task_PNG_to_TXT(image_path, text_path):
     make_AA(file_path=image_path, isOutText=True, out_path=text_path)
 
 
-def tast_PNG_to_TXT_wrapper(args):
-    return task_PNG_to_TXT(*args)
+def tast_png_to_txt_wrapper(args):
+    return task_png_to_txt(*args)
 
 
-def convert_MP4_to_PNG_to_TXT(video_path):
+def convert_mp4_to_png_to_txt(video_path):
     """
     - Args:
         - video_path (str)
     - Returns:
         - text_dir (str)
     """
-    image_dir = convert_MP4_to_PNG(video_path)
+    image_dir = convert_mp4_to_png(video_path)
 
     video_file_name_wo_ext = os.path.split(image_dir)[-1]
     image_flist = get_flist(image_dir, 'png')
@@ -117,7 +117,7 @@ def convert_MP4_to_PNG_to_TXT(video_path):
         # used (Number of Logical CPUs - 1)
         pool = Pool(os.cpu_count() - 1)
         with tqdm(total=len(image_text_flist), bar_format=short_progress_bar) as t:
-            for _ in pool.imap_unordered(tast_PNG_to_TXT_wrapper, image_text_flist):
+            for _ in pool.imap_unordered(tast_png_to_txt_wrapper, image_text_flist):
                 t.update(1)
         print("[INFO] Finish convert: png->txt")
     else:
@@ -126,7 +126,7 @@ def convert_MP4_to_PNG_to_TXT(video_path):
     return text_dir
 
 
-def convert_MP4_to_MP3(video_path):
+def convert_mp4_to_mp3(video_path):
     """
     - Args:
         - video_path (str)

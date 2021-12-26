@@ -1,6 +1,5 @@
 import time
 import cv2
-import pygame.mixer
 
 from args import *
 from convert import *
@@ -10,6 +9,7 @@ def play_audio(audio_path):
     - Args:
     - Returns:
     """
+    import pygame.mixer
     pygame.mixer.init()
     pygame.mixer.music.load(audio_path)
     pygame.mixer.music.play(1)
@@ -23,7 +23,7 @@ def show_video_on_console(video_path, audio_path, audio_off=False):
         - audio_off (bool)
     - Returns:
     """
-    text_dir = convert_MP4_to_PNG_to_TXT(video_path)
+    text_dir = convert_mp4_to_png_to_txt(video_path)
     text_flist = get_flist(text_dir, 'txt')
 
     # get text size
@@ -63,7 +63,7 @@ def main():
     args = get_args()
     video_path = args.video_path
     audio_off = args.audio_off
-    audio_path = convert_MP4_to_MP3(video_path)
+    audio_path = convert_mp4_to_mp3(video_path)
     show_video_on_console(video_path, audio_path, audio_off)
 
 
