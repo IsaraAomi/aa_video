@@ -3,4 +3,5 @@ numpy==1.21.5
 opencv_python==4.5.4.60
 Pillow==8.4.0
 pygame==2.1.1
+term_printer==1.1
 tqdm==4.62.3
