@@ -95,13 +95,6 @@ def main():
     - Args:
     - Returns:
     """
-    # STEP = 8
-
-    # for r in reversed(range(0, 256, STEP)):
-    #     b = 255 - r
-    #     for g in range(0, 256, STEP):           
-            # cprint(" " * 4, attrs=[ColorRGB(r, g, b, is_bg=True)], end="")
-
     args = get_args()
     video_path = args.video_path
     audio_off = args.audio_off
