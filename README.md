@@ -49,3 +49,4 @@
 - [Shortcake SONG #shorts](https://www.youtube.com/watch?v=pbZYQDRMs6g)
 - [【Python】自動でAA（アスキーアート）を生成してくれる単純なコードを書いた](https://qiita.com/Cartelet/items/542fe3f966b8fa98437a)
 - [Python, OpenCVで動画ファイルからフレームを切り出して保存](https://note.nkmk.me/python-opencv-video-to-still-image/)
+- [【Python】ターミナル表示で色を付けたい。](https://qiita.com/nanato12/items/5f287f3008135ca4cb03)

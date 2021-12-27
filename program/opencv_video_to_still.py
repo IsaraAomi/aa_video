@@ -2,6 +2,24 @@ import cv2
 import os
 
 
+def get_video_info_by_cv2(video_path):
+    """
+    - Args:
+        - video_path (str)
+    - Returns:
+        - width (int)
+        - height (int)
+        - frame (int)
+        - fps (int)
+    """
+    cap = cv2.VideoCapture(video_path)
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    frame = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    return width, height, frame ,fps
+
+
 def save_all_frames(video_path, dir_path, basename, ext='png', alpha=1.0, beta=0.0):
     """
     - Args:

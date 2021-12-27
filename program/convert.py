@@ -72,26 +72,27 @@ def convert_mp4_to_png(video_path):
     return image_dir
 
 
-def task_png_to_txt(image_path, text_path):
+def task_png_to_txt(image_path, text_path, width):
     """
     - Args:
         - image_path (str)
         - text_path (str)
     - Returns:
     """
-    make_AA(file_path=image_path, isOutText=True, out_path=text_path)
+    make_AA(file_path=image_path, width=width, isOutText=True, out_path=text_path)
 
 
-def tast_png_to_txt_wrapper(args):
+def task_png_to_txt_wrapper(args):
     return task_png_to_txt(*args)
 
 
-def convert_mp4_to_png_to_txt(video_path):
+def convert_mp4_to_png_to_txt(video_path, width=150):
     """
     - Args:
         - video_path (str)
     - Returns:
         - text_dir (str)
+        - image_dir (str)
     """
     image_dir = convert_mp4_to_png(video_path)
 
@@ -112,18 +113,18 @@ def convert_mp4_to_png_to_txt(video_path):
             image_file_name_wo_ext = os.path.splitext(image_file_name)[0]
             text_file_name = image_file_name_wo_ext + ".txt"
             text_path = os.path.join(text_dir, text_file_name)
-            image_text_flist.append((image_path, text_path))
+            image_text_flist.append((image_path, text_path, width))
         # multiprocessing by Pool
         # used (Number of Logical CPUs - 1)
         pool = Pool(os.cpu_count() - 1)
         with tqdm(total=len(image_text_flist), bar_format=short_progress_bar) as t:
-            for _ in pool.imap_unordered(tast_png_to_txt_wrapper, image_text_flist):
+            for _ in pool.imap_unordered(task_png_to_txt_wrapper, image_text_flist):
                 t.update(1)
         print("[INFO] Finish convert: png->txt")
     else:
         print("[INFO] Skip convert: png->txt")
     
-    return text_dir
+    return text_dir, image_dir
 
 
 def convert_mp4_to_mp3(video_path):

@@ -4,7 +4,8 @@ def get_args(video_path='../data/video/Shortcake_SONG_shorts_1080pFHR.mp4',
              start_over=False,
              audio_off=False,
              alpha=1.2,
-             beta=0.0):
+             beta=0.0,
+             color=False):
     """
     Get command line arguments.
     Arguments set the default values of command line arguments.
@@ -15,5 +16,6 @@ def get_args(video_path='../data/video/Shortcake_SONG_shorts_1080pFHR.mp4',
     parser.add_argument("--audio-off", action="store_true", default=audio_off)
     parser.add_argument("--alpha", type=float, default=alpha)
     parser.add_argument("--beta", type=float, default=beta)
+    parser.add_argument("--color", "-c", action="store_true", default=color)
 
     return parser.parse_args()

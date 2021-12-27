@@ -1,5 +1,13 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
+from tqdm import tqdm
+from multiprocessing import Pool
+import os
+
+# https://qiita.com/Cartelet/items/542fe3f966b8fa98437a
+
+# tqdm's bar_format
+short_progress_bar="{l_bar}{bar:10}{r_bar}{bar:-10b}"
 
 
 def make_map(str_list):
@@ -40,8 +48,34 @@ def make_AA(file_path,
     output(make_map(str_list), imarray, isOutText, out_path)
 
 
+def task_get_rgb_array(file_path, width=150, isFW=False):
+    imag = Image.open(file_path).convert('RGB')
+    imarray = np.asarray(imag.resize((width, width*imag.height//imag.width//(2-int(isFW)))), dtype='uint8')
+    return imarray
+
+
+def task_get_rgb_array_wrapper(args):
+    return task_get_rgb_array(*args)
+
+
+def get_4d_array(flist, t_width, t_height, frame, isFW=False):
+    new_flist = []
+    for file_path in flist:
+        new_flist.append((file_path, t_width, isFW))
+    # multiprocessing by Pool
+    # used (Number of Logical CPUs - 1)
+    varray = np.zeros((frame, t_height, t_width, 3), dtype='uint8')
+    with Pool(os.cpu_count() - 1) as pool:
+        imap = pool.imap(task_get_rgb_array_wrapper, new_flist)
+        vlist = list(tqdm(imap, total=len(new_flist), bar_format=short_progress_bar))
+    varray = np.array(vlist)
+    return varray
+
+
 def main():
-    make_AA(file_path = '../data/image/Shortcake_SONG_shorts_1080pFHR/img_0500.png')
+    file_path = '../data/image/Shortcake_SONG_shorts_1080pFHR/img_0500.png'
+    make_AA(file_path=file_path)
+    # print(get_rgb_array(file_path=file_path))
 
 
 if __name__ == '__main__':
